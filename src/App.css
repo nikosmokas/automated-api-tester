@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,22 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* src/App.css */
+
+/* src/App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Example background color */
+}
+
+.container {
+  width: 80%;
+  max-width: 960px;
+  margin: auto auto; /* Center the container horizontally */
+  padding: 50px;
 }
