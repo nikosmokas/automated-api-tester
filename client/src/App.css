@@ -1,0 +1,27 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+.App {
+  position: relative; /* Ensure relative positioning */
+  overflow-y: auto; /* Enable scrollbar for entire page */
+  min-height: 100vh; /* Ensure full viewport height */
+}
+.particle-background {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 80px);
+  z-index: 0;
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+  padding: auto;
+}

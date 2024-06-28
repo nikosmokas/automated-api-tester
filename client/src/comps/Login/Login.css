@@ -1,0 +1,96 @@
+/* src/comps/Login.css */
+
+.login-page {
+  background-color: #2e2e2e;
+  color: #fff;
+  min-height: 80vh;
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  flex-direction: column;
+  padding: 50px;
+  overflow-y: auto;
+}
+
+.login-form {
+  background-color: #444;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.login-form input {
+  width: 95%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.login-form .password-container {
+  position: relative;
+}
+
+.login-form .password-container input {
+  width: calc(100% - 70px);
+  display: inline-block;
+}
+
+.login-form .password-container button {
+  position: absolute;
+  right: -5px;
+  top: 21px;
+  height: 50%;
+  background-color: #555; /* Default background color */
+  border: none;
+  color: #fff; /* Text color */
+  cursor: pointer;
+  padding: 0 10px; /* Adjust padding for a better fit */
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form .password-container button:hover {
+  background-color: #777; /* Hover background color */
+}
+
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #5cb85c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login-form p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-page a {
+  color: #d3d3d3; /* Very light grey */
+  text-decoration: none; /* Optional: remove underline */
+}
+
+.login-page a:hover {
+  color: #ffffff; /* White or any other color you prefer on hover */
+}
+
+.required {
+  color: red; /* Red color for asterisks to indicate required fields */
+}
