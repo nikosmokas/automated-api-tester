@@ -8,23 +8,26 @@ import Register from "./comps/Register/Register";
 import Login from "./comps/Login/Login";
 import Navbar from "./comps/Navbar/Navbar";
 import Footer from "./comps/Footer/Footer";
+import { AuthProvider } from "./AuthContext";
 
 const App = () => {
   const isLoggedIn = false;
   return (
-    <Router>
-      <div className="App">
-        <Navbar isLoggedIn={isLoggedIn} />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Navbar isLoggedIn={isLoggedIn} />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 };
 
