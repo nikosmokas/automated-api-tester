@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ isLoggedIn }) => {
   return (
     <nav className="navbar">
-      <div className="container">
+      <div className="navbar-container">
         <Link to="/" className="navbar-brand">
           Automated API Tester
         </Link>
