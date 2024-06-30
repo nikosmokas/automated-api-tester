@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../AuthContext"; // Adjust path as needed
 import "./Login.css";
 
 const Login = () => {
-  const { login } = useAuth(); // Use login function from AuthContext
+  const { login, isLoggedIn } = useAuth(); // Use login function and isLoggedIn state from AuthContext
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [passwordShown, setPasswordShown] = useState(false);
   const [loginError, setLoginError] = useState("");
+
+  useEffect(() => {
+    // Redirect to error page if user is already logged in
+    if (isLoggedIn) {
+      return <Navigate to="/error" />;
+    }
+  }, [isLoggedIn]);
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -32,11 +39,6 @@ const Login = () => {
       setLoginError("Invalid credentials. Please try again.");
     }
   };
-
-  // Redirect to home page if user is logged in
-  if (localStorage.getItem("token")) {
-    return <Navigate to="/" />;
-  }
 
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);

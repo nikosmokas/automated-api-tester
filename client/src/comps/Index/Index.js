@@ -1,5 +1,3 @@
-// src/comps/Index.js
-
 import React from "react";
 import { Link } from "react-router-dom";
 import ParticleBackground from "../ParticleBackground/ParticleBackground"; // Adjust path as necessary

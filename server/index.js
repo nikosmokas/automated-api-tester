@@ -22,7 +22,7 @@ mongoose
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Define routes
-app.use("/api/auth", authRoutes); // Prefix for auth routes
+app.use("/api", authRoutes); // Prefix for auth routes
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

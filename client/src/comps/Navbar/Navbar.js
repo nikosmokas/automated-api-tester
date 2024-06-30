@@ -1,17 +1,13 @@
-// src/comps/Navbar.js
+// Navbar.js
 
 import React from "react";
 import "./Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Navbar = ({ isLoggedIn, handleLogout, userName }) => {
-  const navigate = useNavigate();
-
   const handleLogoutClick = () => {
-    // Perform logout actions (clear token, reset state, etc.)
-    handleLogout();
-    // Navigate to the login page after logout
-    navigate("/login");
+    handleLogout(); // Call logout function passed from props
+    Navigate("/"); // Navigate to login page after logout
   };
 
   return (
@@ -23,9 +19,6 @@ const Navbar = ({ isLoggedIn, handleLogout, userName }) => {
         <ul className="navbar-nav">
           {isLoggedIn ? (
             <>
-              <li className="nav-item">
-                <p className="nav-link">Welcome {userName}</p>
-              </li>
               <li className="nav-item">
                 <Link to="/" className="nav-link" onClick={handleLogoutClick}>
                   Logout
