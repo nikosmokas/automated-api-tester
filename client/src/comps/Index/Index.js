@@ -14,7 +14,7 @@ const Index = () => {
           <>
             <h1>Welcome, {name}!</h1>
             <p>Explore your automated API testing journey.</p>
-            <Link to="/">
+            <Link to="/tests">
               <button>Start Testing</button>
             </Link>
           </>

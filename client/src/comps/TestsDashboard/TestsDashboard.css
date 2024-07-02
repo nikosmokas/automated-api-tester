@@ -1,0 +1,128 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+  background-color: #2e2e2e; /* Background color applied to the entire page */
+}
+
+.tests-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Ensure it covers the full viewport height */
+  background-color: #2e2e2e; /* Ensure background color is applied */
+}
+
+.tests-dashboard h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #fff;
+  padding-bottom: 10px;
+  width: 80%; /* Adjust width to center align */
+  max-width: 800px; /* Prevents the h1 from being too wide */
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px; /* Space between the cards */
+  padding: 20px;
+  width: 80%; /* Adjust as needed to center the grid */
+  max-width: 1200px; /* Prevents the grid from being too wide */
+  box-sizing: border-box;
+}
+
+.dashboard-card {
+  background-color: #404040;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  border: 2px solid rgb(151, 151, 151);
+}
+
+.dashboard-card img {
+  width: 250px; /* Adjust size as needed */
+  height: 170px; /* Adjust size as needed */
+  margin-bottom: 10px;
+}
+
+.dashboard-card button {
+  background-color: #2e2e2e;
+  border: 1px solid white;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px; /* Adjust margin to remove extra space */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dashboard-card button:hover {
+  background-color: #474747; /* Slightly darker grey on hover */
+}
+
+.dashboard-card p {
+  margin-top: 10px; /* Adjust margin as needed */
+}
+
+.dashboard-card:hover {
+  transform: scale(1.05);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+    width: 90%;
+  }
+
+  .dashboard-card {
+    padding: 15px;
+  }
+
+  .dashboard-card img {
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
+  }
+
+  .dashboard-card button {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 95%;
+  }
+
+  .dashboard-card {
+    padding: 10px;
+  }
+
+  .dashboard-card img {
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Adjust size as needed */
+  }
+
+  .dashboard-card button {
+    padding: 6px 12px;
+  }
+}
