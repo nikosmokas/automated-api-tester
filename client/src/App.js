@@ -39,7 +39,10 @@ const AppContent = () => {
         <div className="container">
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/tests" element={<TestsDashboard />} />
+            <Route
+              path="/tests"
+              element={isLoggedIn ? <TestsDashboard /> : <Navigate to="/" />}
+            />
             <Route
               path="/register"
               element={isLoggedIn ? <Navigate to="/" /> : <Register />}

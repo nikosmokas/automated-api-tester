@@ -1,7 +1,9 @@
 // src/comps/TestsDashboard/TestsDashboard.js
 
-import React from "react";
 import "./TestsDashboard.css";
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 
 const TestsDashboard = () => {
   return (
