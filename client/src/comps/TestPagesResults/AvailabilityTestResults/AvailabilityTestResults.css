@@ -1,0 +1,96 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling */
+  background-color: #2e2e2e; /* Background color applied to the entire page */
+}
+
+.availability-test-results {
+  width: 100%;
+  max-width: 800px; /* Increased max-width for better layout */
+  margin: 40px auto; /* Added margin for top and bottom spacing */
+  padding: 20px;
+  border: 1px solid #ddd; /* Lightened border color */
+  border-radius: 10px; /* Slightly increased border-radius */
+  background-color: #272727; /* Changed background color to pure white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for better depth */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+}
+
+.availability-test-results:hover {
+  transform: translateY(-5px); /* Hover effect for subtle lift */
+}
+
+.header {
+  font-size: 28px; /* Increased font size */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff; /* Changed text color to white */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow */
+  border-bottom: 2px solid #ddd; /* Added bottom border for separation */
+  padding-bottom: 10px; /* Padding for spacing */
+}
+
+.results-container {
+  margin-top: 30px; /* Increased margin for better spacing */
+}
+
+.results-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; /* Reset margin for consistent spacing */
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px; /* Added horizontal padding */
+  border-bottom: 1px solid #eee; /* Lightened border color */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.result-item:hover {
+  background-color: #f1f1f1; /* Subtle background change on hover */
+}
+
+.url {
+  flex: 2;
+  font-weight: bold;
+  color: #007BFF; /* Added color for better contrast */
+  text-decoration: none;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.url:hover {
+  color: #0056b3; /* Darker color on hover */
+}
+
+.status {
+  flex: 1;
+  text-align: center;
+  padding: 5px 10px; /* Added horizontal padding */
+  border-radius: 20px; /* Increased border-radius for rounded pill shape */
+  font-weight: bold; /* Made text bold for better readability */
+}
+
+.status.success {
+  background-color: #b7e1cd;
+  color: #1b5e20;
+}
+
+.status.failed {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 20px; /* Increased font size */
+  color: #666;
+}

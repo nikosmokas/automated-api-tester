@@ -10,14 +10,14 @@ const Register = () => {
     password: "",
   });
   const [registered, setRegistered] = useState(false);
-  const [passwordShown, setPasswordShown] = useState(false); // Moved useState here
+  const [passwordShown, setPasswordShown] = useState(false); 
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     try {
       const response = await axios.post("/api/register", {

@@ -13,8 +13,9 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Ensure it covers the full viewport height */
-  background-color: #2e2e2e; /* Ensure background color is applied */
+  height: 100vh; 
+  padding-top: 50px; 
+  background-color: #2e2e2e; 
 }
 
 .tests-dashboard h1 {
@@ -70,6 +71,26 @@ html {
   cursor: pointer;
   transition: background-color 0.3s;
 }
+
+/* Link Component Button Styles */
+.link {
+  display: inline-block;
+  background-color: #2e2e2e; /* Dark grey background */
+  color: #fff; /* White text */
+  padding: 10px 20px; /* Padding to make it look like a button */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  border-radius: 4px; /* Rounded corners */
+  border: 1px solid white; /* Border styling */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Hover effect */
+.link:hover {
+  background-color: #474747; /* Slightly darker grey on hover */
+}
+
 
 .dashboard-card button:hover {
   background-color: #474747; /* Slightly darker grey on hover */

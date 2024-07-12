@@ -1,4 +1,3 @@
-// Navbar.js
 
 import React from "react";
 import "./Navbar.css";
@@ -6,8 +5,8 @@ import { Link, Navigate } from "react-router-dom";
 
 const Navbar = ({ isLoggedIn, handleLogout, userName }) => {
   const handleLogoutClick = () => {
-    handleLogout(); // Call logout function passed from props
-    Navigate("/"); // Navigate to login page after logout
+    handleLogout();
+    Navigate("/");
   };
 
   return (

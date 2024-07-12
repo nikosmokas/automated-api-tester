@@ -14,6 +14,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const fetchUserDetails = useCallback(async (token) => {
     try {
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }) => {
         },
       });
       setName(response.data.name);
+      setEmail(response.data.email);
     } catch (error) {
       console.error("Error fetching user details:", error);
       logout();
@@ -49,10 +51,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setName("");
+    setEmail("");
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, name, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, name, email, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

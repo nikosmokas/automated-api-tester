@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ParticleBackground from "../ParticleBackground/ParticleBackground"; // Adjust path as necessary
-import "./Index.css"; // Import CSS for styling
+import ParticleBackground from "../ParticleBackground/ParticleBackground";
+import "./Index.css";
 import { useAuth } from "../../AuthContext";
 
 const Index = () => {

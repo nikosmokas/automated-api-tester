@@ -11,6 +11,8 @@ import Navbar from "./comps/Navbar/Navbar";
 import Footer from "./comps/Footer/Footer";
 import ErrorPage from "./comps/ErrorPage/ErrorPage";
 import TestsDashboard from "./comps/TestsDashboard/TestsDashboard";
+import AvailabilityTest from "./comps/TestPages/AvailabilityTest/AvailabilityTest";
+import AvailabilityTestResult from "./comps/TestPagesResults/AvailabilityTestResults/AvailabilityTestResults"
 import { AuthProvider, useAuth } from "./AuthContext"; // Import AuthProvider and useAuth
 
 const App = () => {
@@ -43,6 +45,17 @@ const AppContent = () => {
               path="/tests"
               element={isLoggedIn ? <TestsDashboard /> : <Navigate to="/" />}
             />
+
+            <Route
+              path="/tests/availabilityTest"
+              element={isLoggedIn ? <AvailabilityTest /> : <Navigate to="/" />}
+            />
+
+            <Route
+              path="/tests/availabilityTest/results"
+              element={isLoggedIn ? <AvailabilityTestResult /> : <Navigate to="/" />}
+            />
+
             <Route
               path="/register"
               element={isLoggedIn ? <Navigate to="/" /> : <Register />}
