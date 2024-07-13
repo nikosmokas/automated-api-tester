@@ -1,126 +1,192 @@
+/* Reset default margin and padding */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styles */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #2e2e2e;
-    color: #fff;
-    min-height: 100vh;
-  }
-  
-  .header {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #2e2e2e;
+  color: #fff;
+  min-height: 100vh; /* Ensure full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+#URLheader {
+  font-size: 28px; /* Increased font size */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff; /* Changed text color to white */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow */
+  padding-bottom: 10px; /* Padding for spacing */
+}
+
+.inputContainer {
+  display: flex;
+  width: 40%;
+  flex-wrap: nowrap; /* Ensure items do not wrap by default */
+  align-items: flex-start; /* Align items at the start of the flex container */
+  margin-bottom: 40px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 1rem;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 90%; /* Adjust width for input, considering margin */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.button {
+  padding: 10px 10px;
+  font-size: 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: #404040;
+  color: #fff;
+  cursor: pointer;
+  width: 40%; /* Adjust width for button */
+  transition: background-color 0.3s;
+  text-align: center; /* Center text within button */
+}
+
+.button:hover {
+  background-color: #474747;
+}
+
+/* Media query for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
   .inputContainer {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .input {
-    padding: 10px;
-    font-size: 1rem;
-    margin-right: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 300px;
-  }
-  
-  .button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: none;
-    background-color: #404040;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .button:hover {
-    background-color: #474747;
-  }
-  
-  .fileUploadContainer {
-    margin-bottom: 20px;
-  }
-  
-  .fileUploadLabel {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1rem;
-  }
-  
-  .fileInput {
-    display: block;
-    cursor: pointer;
-    color: #fff;
-    background-color: #404040;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  .urlListContainer {
-    width: 80%;
-    max-width: 800px;
-  }
-  
-  .urlListHeader {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .urlList {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .button {
-    display: inline-block;
-    background-color: #2e2e2e; 
-    color: #fff; 
-    padding: 10px 20px; 
-    text-align: center; 
-    text-decoration: none; 
-    border-radius: 4px;
-    border: 1px solid white; 
-    transition: background-color 0.3s; 
-    cursor: pointer; 
-  }
-  
-  
-  .button:hover {
-    background-color: #474747; 
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
   }
 
-  .urlItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px;
-    margin-bottom: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  .input {
+    width: calc(100% - 10px); /* Make input full width, considering margin */
+    margin-bottom: 10px; /* Adjust margin bottom for spacing */
   }
-  
-  .removeButton {
-    background-color: #ccc;
-    color: #222222;
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+
+  .button {
+    width: calc(100% - 10px); /* Make button full width, considering margin */
+    margin-top: 10px; /* Adjust margin top for spacing */
   }
-  
-  .removeButton:hover {
-    background-color: #999;
+}
+
+.button:hover {
+  background-color: #474747;
+}
+
+.fileUploadContainer {
+  margin-bottom: 20px;
+}
+
+.fileUploadLabel {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.fileInput {
+  display: block;
+  cursor: pointer;
+  color: #fff;
+  background-color: #404040;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.urlListContainer {
+  max-height: 300px; /* Example height; adjust based on your design */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px; /* Optional padding to improve layout */
+}
+
+@media (max-width: 768px) {
+  .urlListContainer {
+    margin: 20px;
   }
-  
+}
+
+.urlListHeader {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: right; /* Align header to the right */
+}
+
+.urlList {
+  list-style: none;
+  padding: 0;
+}
+
+.backToDash {
+  display: block; /* Ensure the "Go back" button is on a new line */
+  background-color: #2e2e2e;
+  color: #fff;
+  margin-top: 20px; /* Adjust as needed */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid white;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.backToDash:hover {
+  background-color: #474747;
+}
+
+.urlItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.removeButton {
+  background-color: #ccc;
+  color: #222222;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background-color: #999;
+}
+
+#StartButton {
+  font-size: 1.2rem;
+  display: block;
+  background-color: #2e2e2e;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid white;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 30%;
+}
+
+#StartButton:hover {
+  background-color: #474747;
+}
