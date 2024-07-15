@@ -75,13 +75,13 @@ html {
 }
 
 .status.success {
-  background-color: #b7e1cd;
-  color: #1b5e20;
+  background-color: #109218;
+  color: #f5f5f5;
 }
 
-.status.failed {
-  background-color: #ffcdd2;
-  color: #c62828;
+.status {
+  background-color: #830202;
+  color: #f5f5f5;
 }
 
 .loading {
