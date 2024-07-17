@@ -5,11 +5,10 @@ const registerRoute = require("./registerRoute");
 const userDetails = require("./userDetails");
 const availabilityTestRoute = require("./availabilityTestRoute");
 
-// Mount login and register routes
+// Mount routes
 router.use("/login", loginRoute);
 router.use("/register", registerRoute);
 router.use("/user", userDetails);
-router.use("/tests/availabilityTest", availabilityTestRoute)
-
+router.use("/tests/availabilityTest", availabilityTestRoute);
 
 module.exports = router;

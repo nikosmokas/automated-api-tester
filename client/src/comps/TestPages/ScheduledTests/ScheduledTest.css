@@ -1,0 +1,50 @@
+.box {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px; /* Rounded corners */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.availabilityTestHeader {
+  text-align: center;
+}
+
+.box:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Slightly bigger shadow on hover */
+  transform: translateY(-2px); /* Lift the box slightly on hover */
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: 24px; /* Larger title font size */
+  text-align: center;
+  font-weight: bold;
+  border-bottom: #ccc;
+}
+
+.title-line {
+  position: absolute;
+  bottom: -2px; /* Adjust the position as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  width: 50px; /* Adjust the width of the line */
+  height: 2px;
+  background-color: #fff; /* White line */
+  border: none; /* Remove default border */
+}
+
+.field {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.field-name {
+  font-weight: bold;
+  margin-right: 12px;
+  min-width: 100px;
+  color: #b1b1b1; /* Slightly darker than default text color */
+}

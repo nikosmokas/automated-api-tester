@@ -3,9 +3,20 @@ const axios = require("axios");
 const TestResult = require("../models/AvailabilityTestResult");
 const User = require("../models/User");
 const TestRun = require("../models/AvailabilityTestRun");
+const moment = require("moment");
 
 const performAvailabilityTest = async (req, res) => {
-  const { urls, userId } = req.body;
+  const {
+    userId,
+    urls,
+    title,
+    description,
+    runChoice,
+    runDateTime,
+    recurringDays,
+  } = req.body;
+
+  console.log("Request Body:", req.body);
 
   try {
     // Find the user by userId (you may need to authenticate and authorize this)
@@ -13,13 +24,41 @@ const performAvailabilityTest = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    let runNow = null;
+    const utcDate = moment.utc().toDate();
+
+    let date = null;
+
+    console.log(utcDate.getTime());
+
+    if (runChoice === "Recurring") {
+      date = new Date(utcDate.getTime() + recurringDays * 24 * 60 * 60 * 1000);
+    } else if (runChoice === "Run Once") {
+      if (runDateTime === null || runDateTime === "") {
+        date = new Date(utcDate.getTime() + 60 * 1000);
+      } else {
+        date = runDateTime;
+      }
+    } else {
+      runNow = new Date(utcDate.getTime());
+    }
+
+    console.log(date);
 
     // Create a new TestRun document
-    const newTestRun = new TestRun({ user: userId });
+    const newTestRun = new TestRun({
+      user: userId,
+      title: title || "Untitled", // Provide default values if not present
+      description: description || "No description",
+      status: runChoice, // Assuming a default status of 'pending'
+      nextRun: date || null,
+      lastRun: runNow || null,
+      recurrency: recurringDays || 1,
+    });
     const savedTestRun = await newTestRun.save();
     const testRunId = savedTestRun._id;
 
-    // Perform availability test on each URL
+    // Perform availability test on each URL IF NOW ((YOU NEED TO CHANGE THIS IN CASE IT'S RECURRING OR SHOULD RUN LATER))
     const testResults = [];
     for (const url of urls) {
       // Perform availability test logic
@@ -41,12 +80,14 @@ const performAvailabilityTest = async (req, res) => {
         user: userId,
         testRun: testRunId,
         url,
-        availability,
         result, // Include the determined result
       });
       const savedResult = await newTestResult.save();
       testResults.push(savedResult);
     }
+
+    // Update the status of the TestRun to "Completed"
+    await TestRun.findByIdAndUpdate(testRunId, { status: "Completed" });
 
     res.status(200).json({
       message: "Availability tests completed and results saved",

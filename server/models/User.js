@@ -9,7 +9,7 @@ const userSchema = new Schema({
   },
   name: {
     type: String,
-    default: "User", // Default value if name is not provided
+    default: "User",
   },
   password: {
     type: String,
@@ -17,7 +17,7 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.statics.findByEmail = function(email) {
+userSchema.statics.findByEmail = function (email) {
   return this.findOne({ email });
 };
 

@@ -1,0 +1,234 @@
+/* Reset default margin and padding */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #2e2e2e;
+  color: #fff;
+  min-height: 100vh; /* Ensure full viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.newTestContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 10 10;
+}
+
+.header {
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.newTestHeader {
+  text-align: center;
+}
+
+.contentWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.inputSection,
+.formContainer {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 50px;
+  margin-top: 20px;
+  border-radius: 8px; /* Rounded corners */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.formField {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.formField label {
+  margin-right: 10px; /* Space between label and input */
+  min-width: 100px; /* Ensure labels have a consistent width */
+  text-align: right; /* Align text to the right */
+}
+
+.formField input,
+.formField textarea {
+  flex: 1; /* Allow input and textarea to take up remaining space */
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.inputContainer,
+.fileUploadContainer,
+.urlListContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%; /* Adjust width for input, considering margin */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.runNowButton,
+.addURLbutton {
+  display: block;
+  background-color: #2e2e2e;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid white;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.runNowButton {
+  margin-top: 20%;
+}
+
+.runNowButton:hover,
+.addURLbutton:hover {
+  background-color: #474747;
+}
+
+/* Media query for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+  .inputContainer {
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  }
+
+  .input {
+    width: calc(100% - 10px); /* Make input full width, considering margin */
+    margin-bottom: 10px; /* Adjust margin bottom for spacing */
+  }
+
+  .button {
+    width: calc(100% - 10px); /* Make button full width, considering margin */
+    margin-top: 10px; /* Adjust margin top for spacing */
+  }
+}
+
+.fileUploadContainer {
+  margin-bottom: 20px;
+}
+
+.fileUploadLabel {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.fileInput {
+  display: block;
+  cursor: pointer;
+  color: #fff;
+  background-color: #404040;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+#URLheader {
+  font-size: 28px; /* Increased font size */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff; /* Changed text color to white */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow */
+  padding-bottom: 10px; /* Padding for spacing */
+}
+
+.urlListContainer {
+  max-height: 300px; /* Example height; adjust based on your design */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 10px; /* Optional padding to improve layout */
+}
+
+@media (max-width: 768px) {
+  .urlListContainer {
+    margin: 20px;
+  }
+}
+
+.urlListHeader {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: right; /* Align header to the right */
+}
+
+.urlList {
+  list-style: none;
+  padding: 0;
+}
+
+.urlItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.removeButton {
+  background-color: #ccc;
+  color: #222222;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.removeButton:hover {
+  background-color: #999;
+}
+
+.backToDash {
+  display: block; /* Ensure the "Go back" button is on a new line */
+  background-color: #2e2e2e;
+  color: #fff;
+  margin-top: 20px; /* Adjust as needed */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid white;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.backToDash:hover {
+  background-color: #474747;
+}
