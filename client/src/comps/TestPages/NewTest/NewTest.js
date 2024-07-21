@@ -83,11 +83,18 @@ const NewTest = () => {
         recurringDays,
       });
 
-      const testRunId = response.data.results[0].testRun;
+      console.log("We received this response:", response);
+
+      const testRunId = response.data.testRun._id;
 
       setTestRunId(testRunId);
       setLoading(false);
-      setTestsCompleted(true);
+      if (runChoice === "Run Now") {
+        setTestsCompleted(true); // Set testsCompleted to true only if runChoice is "Run Now"
+      }
+      console.log("Tests Completed:", testsCompleted);
+      console.log("User ID:", userId);
+      console.log("Test Run ID:", testRunId);
     } catch (error) {
       console.error("Error sending data to server:", error);
       setLoading(false);
@@ -96,11 +103,16 @@ const NewTest = () => {
 
   useEffect(() => {
     if (testsCompleted && userId && testRunId) {
+      console.log("Tests Completed:", testsCompleted);
+      console.log("User ID:", userId);
+      console.log("Test Run ID:", testRunId);
       navigate(
         `/tests/availabilityTest/results?user=${encodeURIComponent(
           userId
         )}&testRunId=${encodeURIComponent(testRunId)}`
       );
+    } else if (testRunId) {
+      window.location.reload();
     }
   }, [testsCompleted, userId, testRunId, navigate]);
 

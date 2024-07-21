@@ -10,6 +10,7 @@ const testRunSchema = new Schema(
     nextRun: { type: Date, default: null },
     lastRun: { type: Date, default: null },
     recurrency: { type: Number, default: null },
+    urls: [{ type: String, required: true }],
   },
   {
     timestamps: true,

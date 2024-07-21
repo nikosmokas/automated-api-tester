@@ -5,7 +5,7 @@ import TestHistory from "../TestHistory/TestHistory";
 import NewTest from "../NewTest/NewTest";
 import "./AvailabilityTest.css";
 
-const zAvailabilityTest = () => {
+const AvailabilityTest = () => {
   return (
     <div className="container">
       <div className="topSection">

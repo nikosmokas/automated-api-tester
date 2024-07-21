@@ -32,6 +32,7 @@ const AvailabilityTestResult = () => {
       } catch (error) {
         console.error("Error fetching availability test results:", error);
         // Handle error state if needed
+        setLoading(false); // Stop loading even if there's an error
       }
     };
 
@@ -59,8 +60,8 @@ const AvailabilityTestResult = () => {
           <p>No results found for this test run.</p>
         ) : (
           <ul className="results-list">
-            {results.map((result, index) => (
-              <li key={index} className="result-item">
+            {results.map((result) => (
+              <li key={result._id} className="result-item">
                 <span className="url">{result.url}</span>
                 <span className={`status ${result.result.toLowerCase()}`}>
                   {result.result}
