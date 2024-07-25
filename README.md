@@ -90,6 +90,6 @@ This command will build the images defined in the docker-compose.yml file and st
 
 To stop and remove the containers:
 
-    ```docker-compose down```
+```docker-compose down```
 
-
+Thank you
