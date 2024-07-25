@@ -1,14 +1,12 @@
-# /automated-api-tester/docker-compose.yml
-
-version: '3'
+version: "3"
 services:
-  backend:
-    build: ./server
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "5000:5000" # Backend
+      - "3000:3000" # Frontend
     environment:
       - MONGO_URI=mongodb+srv://nikossmokas:dU1nwBSHJSUui8Ck@automatedtestscluster.zfklqfu.mongodb.net/
-  frontend:
-    build: ./client
-    ports:
-      - "80:80"
+    command: npm run dev
