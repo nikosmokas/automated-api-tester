@@ -19,9 +19,9 @@ A web application for automated API testing, featuring both a client and a serve
 - **Backend (Server)**: Developed using Node.js and Express, it handles API requests, manages test executions, and interacts with a MongoDB database. It features routes for authentication, test scheduling, and result storage.
 
 **Overall Architecture**:
+
 - **Frontend**: Handles user interactions and communicates with the backend via API calls.
 - **Backend**: Manages business logic, performs API testing, and stores results.
-
 
 ## Prerequisites
 
@@ -55,41 +55,64 @@ automated-api-tester/
 
 1. **Clone the Repository**
 
-  ``` git clone <repository-url>```
+` git clone <repository-url>`
 
-  ``` cd automated-api-tester```
+` cd automated-api-tester`
 
 2. **Install Docker and Docker Compose**
 
-    Follow the instructions on the official Docker website to install Docker and Docker Compose.
+   Follow the instructions on the official Docker website to install Docker and Docker Compose.
 
 ## Running with Docker
+
 ### Build and Start Containers
 
 1. **Build and Run in Detached Mode**
 
-    To build the Docker images and start the containers in the background:
+   To build the Docker images and start the containers in the background:
 
-    ```docker-compose up -d --build```
+   `docker-compose up -d --build`
 
 This command will build the images defined in the docker-compose.yml file and start the containers in detached mode.
 
 2. **Check Container Status**
 
-    To check if the containers are running:
+   To check if the containers are running:
 
-    ```docker-compose ps```
+   `docker-compose ps`
 
 3. **View Logs**
 
    To view the logs of your services:
 
-    ```docker-compose logs```
+   `docker-compose logs`
 
 4. **Stop and Remove Containers**
 
 To stop and remove the containers:
 
-```docker-compose down```
+`docker-compose down`
+
+5. **Update report and restart application**
+
+```
+# SSH into your server
+ssh user@your-server-ip
+
+# Navigate to your project directory
+cd /path/to/your/project
+
+# Pull the latest code
+git pull origin main  # or the appropriate branch
+
+# Rebuild the Docker images
+docker-compose build
+
+# Restart the Docker containers
+docker-compose up -d
+
+# Clean up old Docker resources (optional)
+docker system prune -f
+```
 
 Thank you
