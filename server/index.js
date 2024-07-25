@@ -13,9 +13,6 @@ const {
 } = require("./tools/schedulers/scheduler");
 const { runTest } = require("./tools/scripts/availabilityTestRun");
 
-const mongoURI =
-  "mongodb+srv://nikossmokas:dU1nwBSHJSUui8Ck@automatedtestscluster.zfklqfu.mongodb.net/";
-
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -27,6 +24,9 @@ const app = express();
 // Body parser middleware
 app.use(express.json()); // Body parser middleware
 app.use(cors()); // Enable CORS
+
+// Use environment variable or default URI
+const mongoURI = process.env.MONGO_URI || "mongodb+srv://nikossmokas:dU1nwBSHJSUui8Ck@automatedtestscluster.zfklqfu.mongodb.net/";
 
 mongoose
   .connect(mongoURI, {})

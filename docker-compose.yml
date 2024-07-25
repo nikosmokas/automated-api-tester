@@ -1,0 +1,14 @@
+# /automated-api-tester/docker-compose.yml
+
+version: '3'
+services:
+  backend:
+    build: ./server
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://nikossmokas:dU1nwBSHJSUui8Ck@automatedtestscluster.zfklqfu.mongodb.net/
+  frontend:
+    build: ./client
+    ports:
+      - "80:80"
