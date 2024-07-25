@@ -1,0 +1,60 @@
+.test-run-card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #2e2e2e;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.test-run-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+.test-run-card__title {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.test-run-card__description {
+  font-style: italic;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.test-run-card__info p {
+  margin: 4px 0;
+}
+
+.test-run-card__urls {
+  margin-top: 20px;
+}
+
+.test-run-card__urls h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.test-run-card__urls ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.test-run-card__urls li {
+  margin-bottom: 8px;
+}
+
+.test-run-card__urls a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.test-run-card__urls a:hover {
+  text-decoration: underline;
+  color: #00bfff;
+}

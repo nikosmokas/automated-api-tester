@@ -1,0 +1,44 @@
+.view-more-button {
+  display: block;
+  background-color: #2e2e2e; /* Bootstrap danger color */
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid white; /* Darker red border */
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.view-more-button:hover {
+  background-color: #2e2e2e; /* Darker red when hovered */
+  border-color: white; /* Even darker border */
+}
+
+#deleteButton {
+  display: inline;
+  background-color: #530300; /* Bootstrap danger color */
+  color: #fff;
+  font-size: 1rem;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid #6e6e6e; /* Darker red border */
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+#deleteButton:hover {
+  background-color: #490200; /* Darker red when hovered */
+  border-color: #8b0d09; /* Even darker border */
+}
+
+#deleteButton:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5); /* Red focus ring */
+}

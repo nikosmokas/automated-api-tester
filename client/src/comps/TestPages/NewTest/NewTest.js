@@ -15,9 +15,32 @@ const NewTest = () => {
   const [testsCompleted, setTestsCompleted] = useState(false);
   const [runChoice, setRunChoice] = useState("Run Now");
   const [runDateTime, setRunDateTime] = useState("");
-  const [recurringDays, setRecurringDays] = useState("");
+  const [recurringMinutes, setRecurringMinutes] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const formatDateTimeLocal = (date) => {
+    const localDate = new Date(date);
+    const year = localDate.getFullYear();
+    const month = String(localDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const day = String(localDate.getDate()).padStart(2, "0");
+    const hours = String(localDate.getHours()).padStart(2, "0");
+    const minutes = String(localDate.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
+
+  const minDateTime = formatDateTimeLocal(new Date(Date.now() + 60 * 1000));
+
+  // Helper function to convert UTC Date to local datetime string
+  const convertUTCToLocal = (utcDate) => {
+    const localDate = new Date(utcDate);
+    return localDate.toISOString().slice(0, -1); // Removes the 'Z' to fit datetime-local format
+  };
+
+  // Helper function to convert local datetime string to UTC Date
+  const convertLocalToUTC = (localDateString) => {
+    return new Date(localDateString).toISOString(); // Converts local datetime to UTC
+  };
 
   useEffect(() => {
     if (email) {
@@ -80,7 +103,7 @@ const NewTest = () => {
         description,
         runChoice,
         runDateTime,
-        recurringDays,
+        recurringMinutes,
       });
 
       console.log("We received this response:", response);
@@ -90,7 +113,7 @@ const NewTest = () => {
       setTestRunId(testRunId);
       setLoading(false);
       if (runChoice === "Run Now") {
-        setTestsCompleted(true); // Set testsCompleted to true only if runChoice is "Run Now"
+        setTestsCompleted(true);
       }
       console.log("Tests Completed:", testsCompleted);
       console.log("User ID:", userId);
@@ -159,25 +182,25 @@ const NewTest = () => {
                 id="runDateTime"
                 value={
                   runDateTime ||
-                  new Date(Date.now() + 60 * 1000).toISOString().slice(0, -8)
+                  formatDateTimeLocal(new Date(Date.now() + 60 * 1000))
                 }
                 required
-                onChange={(e) => setRunDateTime(e.target.value)}
-                min={new Date(Date.now() + 60 * 1000)
-                  .toISOString()
-                  .slice(0, -8)} // Sets minimum value to current date and time + 5 minutes
+                onChange={(e) => {
+                  setRunDateTime(e.target.value); // Local time is used as is
+                }}
+                min={minDateTime} // Minimum value in YYYY-MM-DDTHH:MM format
               />
             </div>
           )}
           {runChoice === "Recurring" && (
             <div className="formField">
-              <label htmlFor="recurringDays">Recurring Days:</label>
+              <label htmlFor="recurringMinutes">Recurring (minutes):</label>
               <input
                 type="number"
-                id="recurringDays"
-                value={recurringDays || 1} // Sets default value to 1
+                id="recurringMinutes"
+                value={recurringMinutes || 1} // Sets default value to 1
                 required
-                onChange={(e) => setRecurringDays(e.target.value)}
+                onChange={(e) => setRecurringMinutes(e.target.value)}
                 min="1"
                 max="90"
               />

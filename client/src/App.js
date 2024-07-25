@@ -14,6 +14,7 @@ import TestsDashboard from "./comps/TestsDashboard/TestsDashboard";
 import AvailabilityTest from "./comps/TestPages/AvailabilityTest/AvailabilityTest";
 import AvailabilityTestResult from "./comps/TestPagesResults/AvailabilityTestResults/AvailabilityTestResults";
 import { AuthProvider, useAuth } from "./AuthContext"; // Import AuthProvider and useAuth
+import TestRunPage from "./comps/TestPages/TestCard/TestRunPage";
 
 const App = () => {
   return (
@@ -54,6 +55,10 @@ const AppContent = () => {
               element={
                 isLoggedIn ? <AvailabilityTestResult /> : <Navigate to="/" />
               }
+            />
+            <Route
+              path="/tests/availabilityTest/scheduledTestCard"
+              element={isLoggedIn ? <TestRunPage /> : <Navigate to="/" />}
             />
             <Route
               path="/register"

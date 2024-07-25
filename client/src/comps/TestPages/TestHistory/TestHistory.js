@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./TestHistory.css";
 
-const HistoryBox = ({ title, description, at, nextRun, onClick, onDelete }) => {
+const HistoryBox = ({
+  title,
+  description,
+  at,
+  nextRun,
+  onClick,
+  onDelete,
+  id,
+}) => {
   return (
     <div className="box" onClick={onClick} style={{ cursor: "pointer" }}>
-      <div className="title">
-        <span>{title}</span>
+      <div className="title-container">
+        <div className="title">
+          <span>{title}</span>
+        </div>
+        <div className="test-id">ID: {id}</div>
+        <div className="title-line"></div>
       </div>
       <hr style={{ width: "100%", border: "1px solid #fff" }} />
       <div className="field">
@@ -21,6 +34,7 @@ const HistoryBox = ({ title, description, at, nextRun, onClick, onDelete }) => {
         <span>{nextRun !== null ? nextRun : "N/A"}</span>
       </div>
       <button
+        id="deleteButton"
         onClick={(e) => {
           e.stopPropagation(); // Prevent the click from triggering the onClick event for the box
           onDelete(); // Call the onDelete function passed as prop
@@ -34,7 +48,8 @@ const HistoryBox = ({ title, description, at, nextRun, onClick, onDelete }) => {
 
 const TestHistory = () => {
   const [history, setHistory] = useState([]);
-  const navigate = useNavigate(); // Initialize navigate
+  const [visibleCount, setVisibleCount] = useState(2); // Number of visible items
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,11 +66,10 @@ const TestHistory = () => {
   }, []);
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleString(); // Format date using toLocaleString()
+    return new Date(dateString).toLocaleString();
   };
 
   const handleBoxClick = (testRunId, userID) => {
-    // Navigate to the test result page with the userId and testRunId as query parameters
     navigate(
       `/tests/availabilityTest/results?user=${userID}&testRunId=${testRunId}`
     );
@@ -63,7 +77,6 @@ const TestHistory = () => {
 
   const handleDelete = async (testRunId) => {
     try {
-      // Call the API to delete the test
       const response = await fetch(
         `/api/tests/availabilityTest/testhistory/${testRunId}`,
         {
@@ -71,7 +84,6 @@ const TestHistory = () => {
         }
       );
       if (response.ok) {
-        // Remove the test from the state
         setHistory(history.filter((run) => run._id !== testRunId));
       } else {
         console.error("Error deleting test:", response.statusText);
@@ -81,22 +93,32 @@ const TestHistory = () => {
     }
   };
 
+  const showMore = () => {
+    setVisibleCount((prevCount) => prevCount + 2); // Show 2 more items
+  };
+
   return (
     <div>
       <h2 className="availabilityTestHeader">Test Runs History</h2>
       <div className="history-container">
-        {history.map((run) => (
+        {history.slice(0, visibleCount).map((run) => (
           <HistoryBox
-            key={run._id} // Use a unique identifier like _id for the key
+            key={run._id}
+            id={run._id}
             title={run.title}
             description={run.description}
             at={formatDate(run.lastRun)}
             nextRun={run.nextRun ? formatDate(run.nextRun) : "No next run"}
-            onClick={() => handleBoxClick(run._id, run.user)} // Pass the test run ID to handleBoxClick
-            onDelete={() => handleDelete(run._id)} // Pass the test run ID to handleDelete
+            onClick={() => handleBoxClick(run._id, run.user)}
+            onDelete={() => handleDelete(run._id)}
           />
         ))}
       </div>
+      {visibleCount < history.length && (
+        <button onClick={showMore} className="view-more-button">
+          View More
+        </button>
+      )}
     </div>
   );
 };

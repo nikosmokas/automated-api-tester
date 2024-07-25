@@ -22,18 +22,20 @@
   font-size: 24px; /* Larger title font size */
   text-align: center;
   font-weight: bold;
-  border-bottom: #ccc;
+  border-bottom: 1px solid #ccc; /* Fix the border style */
 }
 
-.title-line {
-  position: absolute;
-  bottom: -2px; /* Adjust the position as needed */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
-  width: 50px; /* Adjust the width of the line */
-  height: 2px;
-  background-color: #fff; /* White line */
-  border: none; /* Remove default border */
+.test-id {
+  color: grey;
+  font-size: 0.8em;
+  text-align: center;
+  margin-top: 5px; /* Add some space between the title and ID */
+}
+
+.title-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 .field {

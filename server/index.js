@@ -1,8 +1,17 @@
+// Override console.log to include timestamps
+const originalLog = console.log;
+
+console.log = function (...args) {
+  const timestamp = new Date().toISOString();
+  originalLog.apply(console, [timestamp, ...args]);
+};
+
 require("dotenv").config();
 const {
   scheduleRunOnceTests,
   scheduleRecurringTests,
 } = require("./tools/schedulers/scheduler");
+const { runTest } = require("./tools/scripts/availabilityTestRun");
 
 const mongoURI =
   "mongodb+srv://nikossmokas:dU1nwBSHJSUui8Ck@automatedtestscluster.zfklqfu.mongodb.net/";
@@ -20,16 +29,13 @@ app.use(express.json()); // Body parser middleware
 app.use(cors()); // Enable CORS
 
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI, {})
   .then(() => {
     console.log("MongoDB Connected");
 
     // Schedule any tests that should run once
     scheduleRunOnceTests();
-    scheduleRecurringTests();
+    scheduleRecurringTests(runTest);
   })
   .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -38,11 +44,6 @@ app.use("/api", authRoutes); // Prefix for auth routes
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "../client/build")));
-
-// The "catchall" handler: for any request that doesn't match one above, send back the index.html file
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

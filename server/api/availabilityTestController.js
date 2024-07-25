@@ -4,8 +4,9 @@ const TestResult = require("../models/AvailabilityTestResult");
 const User = require("../models/User");
 const TestRun = require("../models/AvailabilityTestRun");
 const moment = require("moment");
-const { runTest } = require("../tools/schedulers/scheduler");
+const { runTest } = require("../tools/scripts/availabilityTestRun");
 const schedule = require("node-schedule");
+const { scheduledJobs } = require("../tools/schedulers/scheduler"); // Adjust the path as necessary
 
 const performAvailabilityTest = async (req, res) => {
   const {
@@ -14,11 +15,9 @@ const performAvailabilityTest = async (req, res) => {
     description,
     runChoice,
     runDateTime,
-    recurringDays,
+    recurringMinutes,
     urls,
   } = req.body;
-
-  console.log("Request Body:", req.body);
 
   try {
     const user = await User.findByEmail(userId);
@@ -31,15 +30,19 @@ const performAvailabilityTest = async (req, res) => {
 
     let date = null;
     let stat = "Scheduled";
+    let interval = 0;
     let newRecurring = 0;
 
     if (runChoice === "Recurring") {
-      if (!recurringDays) {
+      if (!recurringMinutes) {
+        interval = 60 * 1000;
         newRecurring = 1;
       } else {
-        newRecurring = recurringDays;
+        interval = recurringMinutes * 60 * 1000;
+        newRecurring = recurringMinutes;
       }
-      date = new Date(utcDate.getTime() + newRecurring * 24 * 60 * 60 * 1000);
+      date = new Date(utcDate.getTime() + interval);
+      stat = "Recurring";
       console.log("New Date in recurring:", date);
     } else if (runChoice === "Run Once") {
       if (runDateTime === null || runDateTime === "") {
@@ -66,30 +69,39 @@ const performAvailabilityTest = async (req, res) => {
     let savedTestRun = await newTestRun.save();
     const testRunId = savedTestRun._id;
 
+    console.log("Test after parsing:", savedTestRun);
+
     if (runChoice === "Run Once" && date) {
       // Schedule the test run
-      schedule.scheduleJob(date, async function () {
-        await runTest(testRunId);
+      console.log("Added run-once test in scheduler");
+      const job = schedule.scheduleJob(date, async function () {
+        await runTest(testRunId, scheduledJobs); // Pass scheduledJobs to runTest
+        delete scheduledJobs[testRunId];
       });
+      scheduledJobs[testRunId] = job;
+      console.log("Scheduled jobs in runTest: ", scheduledJobs);
     }
 
-    if (runChoice === "Recurring" && recurringDays) {
-      // Schedule the job to run at the specified interval
-      schedule.scheduleJob(
-        { start: date, rule: `0 0 0 */${recurringDays} * *` }, // Runs every recurringDays
+    if (runChoice === "Recurring" && recurringMinutes) {
+      console.log("Added recurring test in scheduler");
+      const job = schedule.scheduleJob(
+        { start: date, rule: `*/${recurringMinutes} * * * *` }, // Runs every recurringMinutes
         async function () {
-          await runTest(testRunId);
+          await runTest(testRunId, scheduledJobs); // Pass scheduledJobs to runTest
         }
       );
+      scheduledJobs[testRunId] = job;
+      console.log("Scheduled jobs in runTest: ", scheduledJobs);
     }
+
+    console.log("Date and time now:", new Date());
 
     // If the test should run now
     if (runNow) {
-      await runTest(testRunId);
+      await runTest(testRunId, scheduledJobs); // Pass scheduledJobs to runTest
       savedTestRun = await TestRun.findByIdAndUpdate(testRunId, {
         status: "Completed",
       }); // Update status after test completion
-      console.log("savedTestRun2 = ", savedTestRun);
     }
 
     res.status(200).json({
@@ -105,7 +117,7 @@ const performAvailabilityTest = async (req, res) => {
 // GET route to retrieve availability test results
 const getAvailabilityTestResults = async (req, res) => {
   const { userId, testRunId } = req.query; // Assuming userId and testRunId are passed from frontend query params
-  console.log("Entered getAvailability");
+  console.log("Date and time now:", new Date());
   try {
     // Find the test results based on userId and optionally testRunId
     let query = { user: userId };
@@ -128,6 +140,11 @@ const deleteAvailabilityTest = async (req, res) => {
   const { id } = req.params;
 
   try {
+    if (scheduledJobs && scheduledJobs[id]) {
+      scheduledJobs[id].cancel();
+      delete scheduledJobs[id];
+      console.log(`Scheduled job for test ID ${id} canceled after deletion.`);
+    }
     // Find and delete the test run
     await TestResult.deleteMany({ testRun: id });
 
@@ -144,8 +161,30 @@ const deleteAvailabilityTest = async (req, res) => {
   }
 };
 
+// GET route to retrieve availability test results
+const getAvailabilityScheduledTest = async (req, res) => {
+  const { userId, testRunId } = req.query; // Assuming userId and testRunId are passed from frontend query params
+  console.log("Entered getAvailabilityScheduledTest");
+  try {
+    // Find the test results based on userId and optionally testRunId
+    let query = { user: userId };
+    if (testRunId) {
+      query.testRun = testRunId;
+    }
+
+    const result = await TestRun.find(query);
+    res.status(200).json({ result });
+  } catch (error) {
+    console.error("Error fetching availability test results:", error);
+    res
+      .status(500)
+      .json({ message: "Failed to fetch availability test results" });
+  }
+};
+
 module.exports = {
   performAvailabilityTest,
   getAvailabilityTestResults,
   deleteAvailabilityTest,
+  getAvailabilityScheduledTest,
 };
