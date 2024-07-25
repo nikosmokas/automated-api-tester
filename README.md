@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Automated API Tester
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application for automated API testing, featuring both a client and a server. This guide covers setting up the project, running it with Docker, and managing it on a remote server.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Application Composition](#composition)
+- [Prerequisites](#prerequisites)
+- [Project Structure](#project-structure)
+- [Setup](#setup)
+- [Running with Docker](#running-with-docker)
 
-### `npm start`
+## Application Composition
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Automated API Tester** is a web application consisting of a React frontend and a Node.js backend.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend (Client)**: Built with React, it provides a user-friendly interface for performing API tests. It includes components for user authentication, test management, and results display.
 
-### `npm test`
+- **Backend (Server)**: Developed using Node.js and Express, it handles API requests, manages test executions, and interacts with a MongoDB database. It features routes for authentication, test scheduling, and result storage.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Overall Architecture**:
+- **Frontend**: Handles user interactions and communicates with the backend via API calls.
+- **Backend**: Manages business logic, performs API testing, and stores results.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before you begin, ensure you have the following installed on your local machine:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Docker
+- Docker Compose
+- Git
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+automated-api-tester/
+├── client/
+│ ├── Dockerfile
+│ ├── package.json
+│ └── ... (other client files)
+├── server/
+│ ├── Dockerfile
+│ ├── package.json
+│ └── ... (other server files)
+├── docker-compose.yml
+├── Dockerfile
+└── README.md
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `client/` - Contains the frontend application.
+- `server/` - Contains the backend application.
+- `docker-compose.yml` - Docker Compose configuration file to run both client and server.
+- `Dockerfile` - (Root) Configuration for building the Docker image.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Clone the Repository**
 
-## Learn More
+  ``` git clone <repository-url>```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  ``` cd automated-api-tester```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. **Install Docker and Docker Compose**
 
-### Code Splitting
+    Follow the instructions on the official Docker website to install Docker and Docker Compose.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Running with Docker
+### Build and Start Containers
 
-### Analyzing the Bundle Size
+1. **Build and Run in Detached Mode**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    To build the Docker images and start the containers in the background:
 
-### Making a Progressive Web App
+    ```docker-compose up -d --build```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This command will build the images defined in the docker-compose.yml file and start the containers in detached mode.
 
-### Advanced Configuration
+2. **Check Container Status**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+    To check if the containers are running:
 
-### Deployment
+    ```docker-compose ps```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+3. **View Logs**
 
-### `npm run build` fails to minify
+   To view the logs of your services:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    ```docker-compose logs```
+
+4. **Stop and Remove Containers**
+
+To stop and remove the containers:
+
+    ```docker-compose down```
+
+
