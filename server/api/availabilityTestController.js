@@ -6,7 +6,7 @@ const TestRun = require("../models/AvailabilityTestRun");
 const moment = require("moment");
 const { runTest } = require("../tools/scripts/availabilityTestRun");
 const schedule = require("node-schedule");
-const { scheduledJobs } = require("../tools/schedulers/scheduler"); // Adjust the path as necessary
+const { scheduledJobs } = require("../tools/schedulers/scheduler");
 
 const performAvailabilityTest = async (req, res) => {
   const {
@@ -25,6 +25,25 @@ const performAvailabilityTest = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Check for the number of scheduled and planned tests - Issue #1
+    const scheduledTestsCount = await TestRun.countDocuments({ user: userId, status: { $in: ["Scheduled", "Recurring"] } });
+    const plannedTestsCount = await TestRun.countDocuments({ user: userId, status: "Scheduled" });
+    const oneHourAgo = moment().subtract(1, 'hour').toDate();
+    const testsLastHour = await TestRun.countDocuments({ user: userId, createdAt: { $gte: oneHourAgo } });
+
+    if (scheduledTestsCount >= 2) {
+      return res.status(400).json({ message: "You can only have 2 scheduled tests at a time." });
+    }
+
+    if (plannedTestsCount >= 2) {
+      return res.status(400).json({ message: "You can only have 2 planned tests at a time." });
+    }
+
+    if (testsLastHour >= 5) {
+      return res.status(400).json({ message: "You can only run 5 tests per hour." });
+    }
+
+
     let runNow = null;
     const utcDate = moment.utc().toDate();
 
@@ -35,8 +54,8 @@ const performAvailabilityTest = async (req, res) => {
 
     if (runChoice === "Recurring") {
       if (!recurringMinutes) {
-        interval = 60 * 1000;
-        newRecurring = 1;
+        newRecurring = 60;
+        interval = newRecurring * 60 * 1000;
       } else {
         interval = recurringMinutes * 60 * 1000;
         newRecurring = recurringMinutes;

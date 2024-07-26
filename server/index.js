@@ -33,7 +33,7 @@ mongoose
   .then(() => {
     console.log("MongoDB Connected");
 
-    // Schedule any tests that should run once
+    // Schedule any tests that should run
     scheduleRunOnceTests();
     scheduleRecurringTests(runTest);
   })

@@ -18,6 +18,8 @@ const NewTest = () => {
   const [recurringMinutes, setRecurringMinutes] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [recurringError, setRecurringError] = useState(60);
+  const [error, setError] = useState(null);
 
   const formatDateTimeLocal = (date) => {
     const localDate = new Date(date);
@@ -30,17 +32,6 @@ const NewTest = () => {
   };
 
   const minDateTime = formatDateTimeLocal(new Date(Date.now() + 60 * 1000));
-
-  // Helper function to convert UTC Date to local datetime string
-  const convertUTCToLocal = (utcDate) => {
-    const localDate = new Date(utcDate);
-    return localDate.toISOString().slice(0, -1); // Removes the 'Z' to fit datetime-local format
-  };
-
-  // Helper function to convert local datetime string to UTC Date
-  const convertLocalToUTC = (localDateString) => {
-    return new Date(localDateString).toISOString(); // Converts local datetime to UTC
-  };
 
   useEffect(() => {
     if (email) {
@@ -95,6 +86,7 @@ const NewTest = () => {
 
   const handleSendToBackend = async () => {
     setLoading(true);
+    setError(null); // Reset error state before making the request
     try {
       const response = await axios.post("/api/tests/availabilityTest/", {
         userId,
@@ -119,8 +111,14 @@ const NewTest = () => {
       console.log("User ID:", userId);
       console.log("Test Run ID:", testRunId);
     } catch (error) {
-      console.error("Error sending data to server:", error);
       setLoading(false);
+
+      if (error.response && error.response.status === 400) {
+        setError(error.response.data.message); // Display the error message from the backend
+      } else {
+        setError("An error occurred while scheduling the test.");
+      }
+      console.error("Error sending data to server:", error);
     }
   };
 
@@ -138,6 +136,17 @@ const NewTest = () => {
       window.location.reload();
     }
   }, [testsCompleted, userId, testRunId, navigate]);
+
+  const validateRecurringMinutes = (value) => {
+    if (value < 60) {
+      setRecurringError("Recurring minutes must be at least 60.");
+    } else if (value > 43200) {
+      setRecurringError("Recurring minutes can't be more than a month (less than 43200 minutes).");
+    }
+    else {
+      setRecurringError("");
+    }
+  };
 
   return (
     <div className="newTestContainer">
@@ -198,12 +207,16 @@ const NewTest = () => {
               <input
                 type="number"
                 id="recurringMinutes"
-                value={recurringMinutes || 1} // Sets default value to 1
+                value={recurringMinutes || 60} 
                 required
-                onChange={(e) => setRecurringMinutes(e.target.value)}
-                min="1"
-                max="90"
+                onChange={(e) => {
+                  setRecurringMinutes(e.target.value);
+                  validateRecurringMinutes(e.target.value);
+                }}
+                min="60" 
+                max="43200"
               />
+              {recurringError && <p className="error">{recurringError}</p>}
             </div>
           )}
           <button
@@ -213,6 +226,7 @@ const NewTest = () => {
           >
             {runChoice === "Run Now" ? "Run Now" : "Schedule Test"}
           </button>
+          {error && <p className="error">{error}</p>} {/* Display error message */}
         </div>
         <div className="inputSection">
           <h2 className="newTestHeader">Enter URL(s)</h2>
