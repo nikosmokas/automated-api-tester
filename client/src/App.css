@@ -3,13 +3,17 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scrollbar */
-  overflow-y: auto;
+  font-family: Arial, sans-serif; /* Optional: add a default font-family */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling only when needed */
+  min-height: 100vh; /* Ensure the body takes up the full viewport height */
 }
 
 .App {
   position: relative; /* Ensure relative positioning */
   min-height: 100vh; /* Ensure full viewport height */
+  display: flex;
+  flex-direction: column; /* Allow child elements to stack vertically */
 }
 .particle-background {
   position: absolute;
@@ -20,7 +24,7 @@ body {
   z-index: 0;
 }
 
-.container {
+.container-main {
   width: 100%;
   margin: auto;
 }

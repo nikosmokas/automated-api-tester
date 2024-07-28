@@ -26,16 +26,25 @@ const performAvailabilityTest = async (req, res) => {
     }
 
     // Check for the number of scheduled and planned tests - Issue #1
-    const scheduledTestsCount = await TestRun.countDocuments({ user: userId, status: { $in: ["Scheduled", "Recurring"] } });
-    const plannedTestsCount = await TestRun.countDocuments({ user: userId, status: "Scheduled" });
-    const oneHourAgo = moment().subtract(1, 'hour').toDate();
-    const testsLastHour = await TestRun.countDocuments({ user: userId, createdAt: { $gte: oneHourAgo } });
+    const scheduledTestsCount = await TestRun.countDocuments({ user: userId, status: "Scheduled" });
+    const recurringTestsCount = await TestRun.countDocuments({ user: userId, status: "Recurring" });
+    const oneHourAgo = moment().utc().subtract(1, 'hour').toDate();
+    const testsLastHour = await TestRun.countDocuments({
+      user: userId,
+      status: "Completed",
+      recurring: 0,
+      createdAt: { $gte: oneHourAgo }
+    });
 
-    if (scheduledTestsCount >= 2) {
+    console.log("ScheduledTestsCount: ", scheduledTestsCount);
+    console.log("RecurringTestsCount: ", recurringTestsCount);
+    console.log("TestLastHourCount: ", testsLastHour);
+
+    if (scheduledTestsCount >= 2 && runChoice === "Run Once") {
       return res.status(400).json({ message: "You can only have 2 scheduled tests at a time." });
     }
 
-    if (plannedTestsCount >= 2) {
+    if (recurringTestsCount >= 2 && runChoice === "Recurring") {
       return res.status(400).json({ message: "You can only have 2 planned tests at a time." });
     }
 

@@ -1,5 +1,13 @@
-.container {
+.container-availability-test {
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+  background-color: #2e2e2e;
+  color: #fff;
+  min-height: 100vh; /* Ensure full viewport height */
+  overflow-y: auto;
 }
 
 .topSection {

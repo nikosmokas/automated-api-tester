@@ -39,7 +39,7 @@ const AppContent = () => {
           userName={name}
           handleLogout={handleLogout}
         />
-        <div className="container">
+        <div className="container-main">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route

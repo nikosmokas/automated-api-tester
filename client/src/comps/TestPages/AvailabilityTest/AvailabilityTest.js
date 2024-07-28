@@ -7,7 +7,7 @@ import "./AvailabilityTest.css";
 
 const AvailabilityTest = () => {
   return (
-    <div className="container">
+    <div className="container-availability-test">
       <div className="topSection">
         <div className="leftSection">
           <ScheduledTests />
