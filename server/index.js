@@ -6,12 +6,14 @@ console.log = function (...args) {
   originalLog.apply(console, [timestamp, ...args]);
 };
 
+const schedule = require('node-schedule');
 require("dotenv").config();
 const {
   scheduleRunOnceTests,
   scheduleRecurringTests,
 } = require("./tools/schedulers/scheduler");
 const { runTest } = require("./tools/scripts/availabilityTestRun");
+const cleanupOldResults = require('./tools/schedulers/cleanupOldResults');
 
 const express = require("express");
 const path = require("path");
@@ -36,6 +38,7 @@ mongoose
     // Schedule any tests that should run
     scheduleRunOnceTests();
     scheduleRecurringTests(runTest);
+    schedule.scheduleJob('0 0 * * *', cleanupOldResults); // Runs daily at midnight
   })
   .catch((err) => console.error("MongoDB connection error:", err));
 
