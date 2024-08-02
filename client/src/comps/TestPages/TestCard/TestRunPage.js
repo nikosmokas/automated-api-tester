@@ -21,14 +21,14 @@ const TestRunList = () => {
       );
       try {
         const response = await axios.get(
-          "/api/tests/availabilityTest/scheduledTests",
+          "/api/tests/availabilityTest/scheduledTestCard",
           {
             params: { userId, testRunId },
           }
         );
         console.log("API Response:", response.data); // Log the response data
 
-        setTest(response.data);
+        setTest(response.data.result);
       } catch (error) {
         console.error("Error fetching test runs:", error);
         setTest([]); // Ensure `test` is always an array
@@ -53,7 +53,7 @@ const TestRunList = () => {
             <h2>No URLs in this test</h2>
           )
         ) : (
-          <p>No tests available</p>
+          <p class="no-urls-message">No URLs available</p>
         )}
       </div>
     </div>

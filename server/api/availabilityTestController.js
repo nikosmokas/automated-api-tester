@@ -189,7 +189,7 @@ const deleteAvailabilityTest = async (req, res) => {
   }
 };
 
-// GET route to retrieve availability test results
+// GET route to retrieve availability test
 const getAvailabilityScheduledTest = async (req, res) => {
   const { userId, testRunId } = req.query; // Assuming userId and testRunId are passed from frontend query params
   console.log("Entered getAvailabilityScheduledTest");
@@ -197,7 +197,7 @@ const getAvailabilityScheduledTest = async (req, res) => {
     // Find the test results based on userId and optionally testRunId
     let query = { user: userId };
     if (testRunId) {
-      query.testRun = testRunId;
+      query._id = testRunId;
     }
 
     const result = await TestRun.find(query);

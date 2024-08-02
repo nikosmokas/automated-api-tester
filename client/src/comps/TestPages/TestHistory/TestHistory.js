@@ -5,6 +5,7 @@ import "./TestHistory.css";
 const HistoryBox = ({
   title,
   description,
+  status,
   at,
   nextRun,
   onClick,
@@ -26,7 +27,11 @@ const HistoryBox = ({
         <span>{description}</span>
       </div>
       <div className="field">
-        <span className="field-name">At:</span>
+        <span className="field-name">Status:</span>
+        <span>{status}</span>
+      </div>
+      <div className="field">
+        <span className="field-name">Ran At:</span>
         <span>{at}</span>
       </div>
       <div className="field">
@@ -107,6 +112,7 @@ const TestHistory = () => {
             id={run._id}
             title={run.title}
             description={run.description}
+            status={run.status}
             at={formatDate(run.lastRun)}
             nextRun={run.nextRun ? formatDate(run.nextRun) : "No next run"}
             onClick={() => handleBoxClick(run._id, run.user)}

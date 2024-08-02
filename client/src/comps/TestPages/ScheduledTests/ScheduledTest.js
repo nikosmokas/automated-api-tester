@@ -27,7 +27,7 @@ const Box = ({
       </div>
       <div className="field">
         <span className="field-name">Recurring:</span>
-        <span>{recurrency !== null ? recurrency : "No"}</span>
+        <span>{recurrency === null || recurrency === 0 ? "No" : recurrency}</span>
       </div>
       <div className="field">
         <span className="field-name">Next Run:</span>
@@ -72,7 +72,7 @@ const ScheduledTests = () => {
     return new Date(dateString).toLocaleString();
   };
 
-  const handleBoxClick = (testRunId, userID) => {
+  const handleBoxClick = (userID, testRunId) => {
     navigate(
       `/tests/availabilityTest/scheduledTestCard?user=${userID}&testRunId=${testRunId}`
     );
@@ -112,7 +112,7 @@ const ScheduledTests = () => {
             description={run.description}
             recurrency={run.recurrency}
             nextRun={formatDate(run.nextRun)}
-            onClick={() => handleBoxClick(run._id, run.user)}
+            onClick={() => handleBoxClick(run.user, run._id)}
             onDelete={() => handleDelete(run._id)}
           />
         ))}

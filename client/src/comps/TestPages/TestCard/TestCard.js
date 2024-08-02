@@ -48,7 +48,7 @@ const TestRun = ({ testRun }) => {
               </li>
             ))
           ) : (
-            <p>No URLs available</p>
+            <p class="no-urls-message">No URLs available</p>
           )}
         </ul>
       </div>

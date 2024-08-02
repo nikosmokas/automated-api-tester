@@ -58,3 +58,12 @@
   text-decoration: underline;
   color: #00bfff;
 }
+
+.no-urls-message {
+  color: white; /* Sets the text color to white */
+  font-size: 16px; /* Optional: Sets the font size */
+  text-align: center; /* Optional: Centers the text */
+  padding: 10px; /* Optional: Adds padding around the text */
+  background-color: #2e2e2e; /* Optional: Adds a background color */
+  border-radius: 5px; /* Optional: Rounds the corners */
+}

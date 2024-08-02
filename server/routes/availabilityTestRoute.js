@@ -15,11 +15,12 @@ router.get("/scheduledTestCard", AvailabilityTest.getAvailabilityScheduledTest);
 router.get("/testhistory", async (req, res) => {
   try {
     const currentDate = new Date();
-    const testRuns = await TestRun.find({ lastRun: { $lt: currentDate } }).sort(
-      {
-        updatedAt: -1,
-      }
-    );
+    const testRuns = await TestRun.find({
+      $or: [
+        { lastRun: { $lt: currentDate } }, // Tests with lastRun before current date
+        { status: 'Cancelled' } // Include cancelled tests
+      ]
+    }).sort({ updatedAt: -1 });
     res.status(200).json(testRuns);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

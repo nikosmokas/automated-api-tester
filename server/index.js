@@ -14,6 +14,7 @@ const {
 } = require("./tools/schedulers/scheduler");
 const { runTest } = require("./tools/scripts/availabilityTestRun");
 const cleanupOldResults = require('./tools/schedulers/cleanupOldResults');
+const markMissedTestsAsCancelled = require('./tools//scripts/markMissedTestsAsCancelled');
 
 const express = require("express");
 const path = require("path");
@@ -39,6 +40,7 @@ mongoose
     scheduleRunOnceTests();
     scheduleRecurringTests(runTest);
     schedule.scheduleJob('0 0 * * *', cleanupOldResults); // Runs daily at midnight
+    markMissedTestsAsCancelled();
   })
   .catch((err) => console.error("MongoDB connection error:", err));
 
