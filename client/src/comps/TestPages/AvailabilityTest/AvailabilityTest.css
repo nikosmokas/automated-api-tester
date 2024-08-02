@@ -38,3 +38,25 @@
   align-items: center;
   width: 100%;
 }
+
+/* Media query for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+  .topSection {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .middleLine {
+    display: none; /* Hide the middle line */
+  }
+
+  .leftSection,
+  .rightSection {
+    width: 100%;
+  }
+
+  .backToDash {
+    width: 90%; /* Make the button width responsive */
+  }
+}

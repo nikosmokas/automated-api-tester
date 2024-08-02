@@ -15,10 +15,10 @@ const NewTest = () => {
   const [testsCompleted, setTestsCompleted] = useState(false);
   const [runChoice, setRunChoice] = useState("Run Now");
   const [runDateTime, setRunDateTime] = useState("");
-  const [recurringMinutes, setRecurringMinutes] = useState("");
+  const [recurringMinutes, setRecurringMinutes] = useState(60);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [recurringError, setRecurringError] = useState(60);
+  const [recurringError, setRecurringError] = useState("");
   const [error, setError] = useState(null);
 
   const formatDateTimeLocal = (date) => {

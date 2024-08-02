@@ -117,22 +117,7 @@ html {
   background-color: #474747;
 }
 
-/* Media query for smaller screens (e.g., phones) */
-@media (max-width: 768px) {
-  .inputContainer {
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-  }
 
-  .input {
-    width: calc(100% - 10px); /* Make input full width, considering margin */
-    margin-bottom: 10px; /* Adjust margin bottom for spacing */
-  }
-
-  .button {
-    width: calc(100% - 10px); /* Make button full width, considering margin */
-    margin-top: 10px; /* Adjust margin top for spacing */
-  }
-}
 
 .fileUploadContainer {
   margin-bottom: 20px;
@@ -231,4 +216,47 @@ html {
 
 .backToDash:hover {
   background-color: #474747;
+}
+
+/* Media query for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+  .inputContainer {
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  }
+
+  .input {
+    width: calc(100% - 10px); /* Make input full width, considering margin */
+    margin-bottom: 10px; /* Adjust margin bottom for spacing */
+  }
+
+  .button {
+    width: calc(100% - 10px); /* Make button full width, considering margin */
+    margin-top: 10px; /* Adjust margin top for spacing */
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .formContainer,
+  .inputSection {
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .urlListContainer {
+    margin: 20px;
+  }
+
+  .runNowButton {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .formField input[type="datetime-local"] {
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
 }

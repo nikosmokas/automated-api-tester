@@ -107,3 +107,31 @@ html {
 .button:hover {
   background-color: #474747;
 }
+
+@media (max-width: 768px) {
+  .availability-test-results {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+
+  .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .url {
+    margin-bottom: 10px;
+  }
+
+  .status {
+    text-align: left;
+  }
+
+  .button {
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+}
