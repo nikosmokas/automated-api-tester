@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fullstack-deployment
+  name: api-tester-deployment
   namespace: api-tester
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fullstack
+      app: api-tester
   template:
     metadata:
       labels:
-        app: fullstack
+        app: api-tester
     spec:
       containers:
-        - name: fullstack
-          image: your-fullstack-image
+        - name: api-tester
+          image: api-tester:latest
           ports:
             - containerPort: 3000  # Frontend port
             - containerPort: 5000  # Backend port

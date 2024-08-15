@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fullstack-service
+  name: api-tester-service
   namespace: api-tester
 spec:
   ports:
@@ -12,4 +12,4 @@ spec:
       targetPort: 5000
       name: backend
   selector:
-    app: fullstack
+    app: api-tester
