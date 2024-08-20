@@ -15,10 +15,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-});
+}, { timestamps: true });
 
 userSchema.statics.findByEmail = function (email) {
   return this.findOne({ email });
 };
+
 
 module.exports = mongoose.model("User", userSchema);

@@ -1,0 +1,108 @@
+/* Main container for the control panel */
+.control-panel-container {
+    display: flex;
+    min-height: 80vh;
+    background-color: #2e2e2e;
+    color: #fff;
+  }
+  
+  /* Sidebar styles */
+  .control-panel-sidebar {
+    width: 200px;
+    background-color: #333;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+  
+  .control-panel-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .control-panel-sidebar li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .control-panel-sidebar li.active,
+  .control-panel-sidebar li:hover {
+    background-color: #555;
+  }
+  
+  /* Content area styles */
+  .control-panel-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #444;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column; /* Default layout is column */
+  }
+  
+  /* For settings view, display components side by side */
+  .control-panel-content.settings {
+    flex-direction: column; /* Column layout by default */
+  }
+  
+  /* Container for ChangeUsername and ChangePassword */
+  .settings-container {
+    display: flex;
+    flex-direction: row; /* Side-by-side layout by default */
+    gap: 20px; /* Space between the components */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  }
+  
+  /* Ensure that each child div takes up at least 300px width */
+  .settings-container > div {
+    flex: 1;
+    min-width: 300px; /* Adjust width for responsive design */
+  }
+  
+  /* Remove margin from the last child in the row */
+  .settings-container > div:last-child {
+    margin-right: 0;
+  }
+  
+  
+  /* Divider styles */
+  .information-divider {
+    border: 0;
+    height: 1px;
+    background: #ccc; /* Adjust color if needed */
+    margin-top: 20px; /* Space above the line */
+    margin-bottom: 20px; /* Space below the line */
+  }
+  
+  /* Additional styles for message */
+  .control-panel-content .message {
+    color: red;
+  }
+  
+  /* Specific styles for the information panel */
+  .information {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+  }
+  
+  .information h2 {
+    margin-bottom: 20px;
+  }
+  
+  .information p {
+    margin-bottom: 10px;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .settings-container {
+      flex-direction: column; /* Stack components on top of each other */
+    }
+  }
+  

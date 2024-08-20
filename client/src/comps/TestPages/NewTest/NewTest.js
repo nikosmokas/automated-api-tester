@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../../AuthContext"; // Adjust the path to your AuthContext file
-import "./NewTest.css"; // Adjust the path to your CSS file
+import { useAuth } from "../../../AuthContext"; 
+import "./NewTest.css"; 
 
 const NewTest = () => {
   const navigate = useNavigate();

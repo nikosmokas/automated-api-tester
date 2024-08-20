@@ -1,0 +1,22 @@
+.information {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+  }
+  
+  .information h2 {
+    margin-bottom: 20px;
+  }
+  
+  .information p {
+    margin-bottom: 10px;
+  }
+  
+  .information-divider {
+    border: 0;
+    height: 1px;
+    background: #ccc; /* Adjust color if needed */
+    margin-top: 20px; /* Space above the line */
+    margin-bottom: 20px; /* Space below the line */
+  }

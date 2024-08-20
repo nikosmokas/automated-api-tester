@@ -1,12 +1,24 @@
 
 import React from "react";
 import "./Navbar.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = ({ isLoggedIn, handleLogout, userName }) => {
+const Navbar = ({ isLoggedIn, handleLogout, email }) => {
+
+  const navigate = useNavigate();
+
+  const handleUserPanelClick = () => {
+    if (email) {
+      const encodedEmail = encodeURIComponent(email);
+      console.log("Navigating to User Panel with email:", encodedEmail);
+      navigate(`/user/${encodedEmail}`);
+    }
+    
+  };
+
   const handleLogoutClick = () => {
     handleLogout();
-    Navigate("/");
+    navigate("/");
   };
 
   return (
@@ -19,9 +31,14 @@ const Navbar = ({ isLoggedIn, handleLogout, userName }) => {
           {isLoggedIn ? (
             <>
               <li className="nav-item">
-                <Link to="/" className="nav-link" onClick={handleLogoutClick}>
+                <button className="nav-link" onClick={handleUserPanelClick}>
+                  User Panel
+                </button>
+              </li>
+              <li className="nav-item">
+                <button className="nav-link" onClick={handleLogoutClick}>
                   Logout
-                </Link>
+                </button>
               </li>
             </>
           ) : (

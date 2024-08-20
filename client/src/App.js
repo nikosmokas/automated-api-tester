@@ -15,6 +15,7 @@ import AvailabilityTest from "./comps/TestPages/AvailabilityTest/AvailabilityTes
 import AvailabilityTestResult from "./comps/TestPagesResults/AvailabilityTestResults/AvailabilityTestResults";
 import { AuthProvider, useAuth } from "./AuthContext"; // Import AuthProvider and useAuth
 import TestRunPage from "./comps/TestPages/TestCard/TestRunPage";
+import ControlPanel from "./comps/ControlPanel/ControlPanel";
 
 const App = () => {
   return (
@@ -25,8 +26,9 @@ const App = () => {
 };
 
 const AppContent = () => {
-  const { isLoggedIn, name, logout } = useAuth(); // Use useAuth hook to get authentication state
+  const { isLoggedIn, name, logout, email, creationDate } = useAuth(); // Use useAuth hook to get authentication state
 
+  console.log("Auth State:", { isLoggedIn, name, email, creationDate });
   const handleLogout = () => {
     logout();
   };
@@ -38,6 +40,7 @@ const AppContent = () => {
           isLoggedIn={isLoggedIn}
           userName={name}
           handleLogout={handleLogout}
+          email={email}
         />
         <div className="container-main">
           <Routes>
@@ -67,6 +70,10 @@ const AppContent = () => {
             <Route
               path="/login"
               element={isLoggedIn ? <Navigate to="/" /> : <Login />}
+            />
+            <Route 
+              path="/user/:email" 
+              element={isLoggedIn ? <ControlPanel /> : <Navigate to="/" />}
             />
             <Route path="*" element={<ErrorPage />} />{" "}
             {/* Catch all unmatched routes */}
