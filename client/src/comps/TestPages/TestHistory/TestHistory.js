@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./TestHistory.css";
+import { useAuth } from "../../../AuthContext";
+
 
 const HistoryBox = ({
   title,
@@ -55,12 +57,15 @@ const TestHistory = () => {
   const [history, setHistory] = useState([]);
   const [visibleCount, setVisibleCount] = useState(2); // Number of visible items
   const navigate = useNavigate();
+  const { email } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/tests/availabilityTest/testhistory"); // Adjust the URL as needed
+        const userID = email;
+        const response = await fetch(`/api/tests/availabilityTest/testhistory?user=${userID}`); // Adjust the URL as needed
         const data = await response.json();
+        console.log("Fetched data:", data);
         setHistory(data);
       } catch (error) {
         console.error("Error fetching test run history:", error);
@@ -68,7 +73,7 @@ const TestHistory = () => {
     };
 
     fetchData();
-  }, []);
+  }, [email]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString();
@@ -106,7 +111,7 @@ const TestHistory = () => {
     <div>
       <h2 className="availabilityTestHeader">Test Runs History</h2>
       <div className="history-container">
-        {history.slice(0, visibleCount).map((run) => (
+      {Array.isArray(history) && history.slice(0, visibleCount).map((run) => (
           <HistoryBox
             key={run._id}
             id={run._id}

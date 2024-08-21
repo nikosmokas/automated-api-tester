@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ScheduledTest.css";
+import { useAuth } from "../../../AuthContext";
+
 
 const Box = ({
   title,
@@ -50,24 +52,25 @@ const ScheduledTests = () => {
   const [scheduled, setScheduled] = useState([]);
   const [visibleCount, setVisibleCount] = useState(2); // Number of visible items
   const navigate = useNavigate();
+  const { email } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const userID = email;
         const response = await fetch(
-          "/api/tests/availabilityTest/scheduledtests"
+          `/api/tests/availabilityTest/scheduledtests?user=${userID}`
         );
         const data = await response.json();
         console.log("Fetched data:", data);
         setScheduled(data);
       } catch (error) {
-        console.error("Error fetching test run scheduledtests:", error);
+        console.error("Error fetching test run scheduled tests:", error);
       }
     };
-
+  
     fetchData();
-  }, []);
-
+  }, [email]);
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString();
   };
@@ -104,7 +107,7 @@ const ScheduledTests = () => {
     <div>
       <h2 className="availabilityTestHeader">Scheduled Tests</h2>
       <div className="scheduled-container">
-        {scheduled.slice(0, visibleCount).map((run) => (
+      {Array.isArray(scheduled) && scheduled.slice(0, visibleCount).map((run) => (
           <Box
             key={run._id}
             id={run._id}

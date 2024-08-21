@@ -6,7 +6,8 @@ import ChangeUsername from "./ControlPanelComps/ChangeName/ChangeName";
 import ChangePassword from "./ControlPanelComps/ChangePassword/ChangePassword";
 import "./ControlPanel.css";
 import { useAuth } from "../../AuthContext";
-
+import TestHistory from "../TestPages/TestHistory/TestHistory";
+import ScheduledTests from "../TestPages/ScheduledTests/ScheduledTest";
 const ControlPanel = () => {
   const [selectedOption, setSelectedOption] = useState("Information");
   const { name, email, creationDate } = useAuth();
@@ -24,16 +25,9 @@ const ControlPanel = () => {
         );
       case "Availability Tests":
         return (
-          <div className="test-section">
-            <h3>Upcoming Tests</h3>
-            {/* Render upcoming tests here */}
-          </div>
-        );
-      case "Test History":
-        return (
-          <div className="test-section">
-            <h3>Test History</h3>
-            {/* Render test history here */}
+          <div className="settings-container">
+            <ScheduledTests />
+            <TestHistory />
           </div>
         );
       case "Performance Tests":
