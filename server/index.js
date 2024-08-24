@@ -14,7 +14,7 @@ const {
 } = require("./tools/schedulers/scheduler");
 const { runTest } = require("./tools/scripts/availabilityTestRun");
 const cleanupOldResults = require('./tools/schedulers/cleanupOldResults');
-const markMissedTestsAsCancelled = require('./tools//scripts/markMissedTestsAsCancelled');
+const markMissedTestsAsCancelled = require('./tools/scripts/markMissedTestsAsCancelled');
 
 const express = require("express");
 const path = require("path");
