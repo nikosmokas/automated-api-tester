@@ -1,15 +1,14 @@
-# queue-management-service/Dockerfile
-FROM node:14
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:17-jdk-slim
 
+# Set the working directory
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-
-COPY . .
+# Copy the application JAR file to the container
+COPY target/queue-management-service-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port the app runs on
-EXPOSE 5001
+EXPOSE 8081
 
-# Define the command to run the app
-CMD ["node", "index.js"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
